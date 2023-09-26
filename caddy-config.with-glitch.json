@@ -1,0 +1,42 @@
+{
+  "admin": {
+    "disabled": true
+  },
+  "apps": {
+    "http": {
+      "servers": {
+        "oh_api": {
+          "listen": [":8010"],
+          "routes": [
+            {
+              "handle": [
+                {
+                  "handler": "reverse_proxy",
+                  "load_balancing": {
+                    "try_duration": "10s",
+                    "retry_match": [
+                      {
+                        "method": []
+                      }
+                    ]
+                  },
+                  "upstreams": [
+                    {
+                      "dial": "localhost:8011",
+                      "max_requests": 1
+                    }
+                  ],
+                  "transport": {
+                    "protocol": "http",
+                    "response_header_timeout": "20s",
+                    "read_timeout": "20s"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

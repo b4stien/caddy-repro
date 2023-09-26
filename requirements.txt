@@ -1,0 +1,9 @@
+# api
+gunicorn==20.1.0
+Flask==2.2.2
+
+# client
+httpx[http2]==0.23.1
+
+
+
